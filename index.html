@@ -15,7 +15,6 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
     <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/checkout.css" />
   </head>
 
   <body>
@@ -147,28 +146,10 @@
         </div>
 
         <div class="checkout-grid" id="checkoutGrid">
-          <!-- LEFT: Form -->
+          <!-- LEFT: Single-step Form -->
           <section class="checkout-form-section">
-            <!-- Step Indicators -->
-            <div class="checkout-steps" id="checkoutSteps">
-              <div class="step active" data-step="1">
-                <span class="step-number">1</span>
-                <span class="step-label">Delivery</span>
-              </div>
-              <div class="step-line"></div>
-              <div class="step" data-step="2">
-                <span class="step-number">2</span>
-                <span class="step-label">Payment</span>
-              </div>
-              <div class="step-line"></div>
-              <div class="step" data-step="3">
-                <span class="step-number">3</span>
-                <span class="step-label">Confirm</span>
-              </div>
-            </div>
-
-            <!-- Step 1: Delivery Info -->
-            <form class="checkout-form" id="deliveryForm" novalidate>
+            <form class="checkout-form" id="checkoutForm" novalidate>
+              <!-- Delivery Info -->
               <h2 class="form-section-title">
                 <i class="fa-solid fa-location-dot"></i> Delivery Information
               </h2>
@@ -216,13 +197,8 @@
                 </div>
               </div>
 
-              <button type="submit" class="form-next-btn" id="toPaymentBtn">
-                Continue to Payment <i class="fa-solid fa-arrow-right"></i>
-              </button>
-            </form>
-
-            <!-- Step 2: Payment Method -->
-            <div class="checkout-form" id="paymentForm" style="display:none;">
+              <!-- Payment Method -->
+              <div class="form-divider"></div>
               <h2 class="form-section-title">
                 <i class="fa-solid fa-credit-card"></i> Payment Method
               </h2>
@@ -283,35 +259,11 @@
                 </div>
               </div>
 
-              <div class="form-actions">
-                <button type="button" class="form-back-btn" id="backToDeliveryBtn">
-                  <i class="fa-solid fa-arrow-left"></i> Back
-                </button>
-                <button type="button" class="form-next-btn" id="toConfirmBtn">
-                  Review Order <i class="fa-solid fa-arrow-right"></i>
-                </button>
-              </div>
-            </div>
-
-            <!-- Step 3: Confirmation -->
-            <div class="checkout-form" id="confirmSection" style="display:none;">
-              <h2 class="form-section-title">
-                <i class="fa-solid fa-clipboard-check"></i> Order Review
-              </h2>
-
-              <div class="confirm-details" id="confirmDetails">
-                <!-- Populated by JS -->
-              </div>
-
-              <div class="form-actions">
-                <button type="button" class="form-back-btn" id="backToPaymentBtn">
-                  <i class="fa-solid fa-arrow-left"></i> Back
-                </button>
-                <button type="button" class="place-order-btn" id="placeOrderBtn">
-                  <i class="fa-solid fa-check"></i> Place Order
-                </button>
-              </div>
-            </div>
+              <!-- Place Order -->
+              <button type="submit" class="place-order-btn" id="placeOrderBtn">
+                <i class="fa-solid fa-check"></i> Place Order
+              </button>
+            </form>
           </section>
 
           <!-- RIGHT: Order Summary Sidebar -->
@@ -369,6 +321,5 @@
     </footer>
 
     <script src="js/script.js"></script>
-    <script src="js/checkout.js"></script>
   </body>
 </html>

@@ -1,3 +1,11 @@
+/**
+ * Lo2ma Script — script.js
+ * Unified script: menu, cart, checkout modal, order placement.
+ */
+
+/* =====================================================
+   1. LOAD MENU DATA
+   ===================================================== */
 let menuItems = [];
 async function loadMenu() {
   try {
@@ -7,9 +15,9 @@ async function loadMenu() {
     console.error("Failed to load menu:", error);
   }
 }
+
 /* =====================================================
    2. STATE
-   cart: array of { ...item, quantity }
    ===================================================== */
 let cart = [];
 let activeCategory = "all";
@@ -24,7 +32,6 @@ function loadCart() {
     const saved = localStorage.getItem("lo2maCart");
     if (saved) cart = JSON.parse(saved);
   } catch (e) {
-    // If parsing fails just start fresh
     cart = [];
   }
 }
@@ -246,7 +253,164 @@ function showToast(message) {
 }
 
 /* =====================================================
-   9. EVENT LISTENERS — delegation & UI events
+   9. CHECKOUT MODAL — OPEN / CLOSE
+   ===================================================== */
+
+function openCheckout() {
+  const overlay = document.getElementById("checkoutOverlay");
+  const emptyState = document.getElementById("checkoutEmpty");
+  const grid = document.getElementById("checkoutGrid");
+
+  // Reset form
+  document.getElementById("checkoutForm").reset();
+  // Reset payment option visuals
+  document.querySelectorAll(".payment-option").forEach(o => o.classList.remove("active"));
+  const cashOption = document.querySelector('.payment-option[data-method="cash"]');
+  if (cashOption) cashOption.classList.add("active");
+  document.getElementById("cardDetails").style.display = "none";
+
+  // Check if cart is empty
+  if (cart.length === 0) {
+    emptyState.classList.add("visible");
+    grid.style.display = "none";
+  } else {
+    emptyState.classList.remove("visible");
+    grid.style.display = "";
+    renderSummary();
+    setupPaymentMethods();
+  }
+
+  // Show the modal
+  overlay.classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+
+function closeCheckout() {
+  const overlay = document.getElementById("checkoutOverlay");
+  overlay.classList.remove("open");
+  document.body.style.overflow = "";
+}
+
+/* =====================================================
+   10. ORDER SUMMARY (sidebar in checkout modal)
+   ===================================================== */
+function renderSummary() {
+  const list = document.getElementById("summaryItems");
+  list.innerHTML = "";
+
+  cart.forEach(item => {
+    const li = document.createElement("li");
+    li.classList.add("summary-item");
+    li.innerHTML = `
+      <img class="summary-item-img" src="${item.image}" alt="${item.name}" />
+      <div class="summary-item-info">
+        <p class="summary-item-name">${item.name}</p>
+        <p class="summary-item-qty">x${item.quantity}</p>
+      </div>
+      <span class="summary-item-price">$${(item.price * item.quantity).toFixed(2)}</span>
+    `;
+    list.appendChild(li);
+  });
+
+  const subtotal = cart.reduce((sum, c) => sum + c.price * c.quantity, 0);
+  const delivery = subtotal >= 30 ? 0 : 3.99;
+  const total = subtotal + delivery;
+
+  document.getElementById("summarySubtotal").textContent = `$${subtotal.toFixed(2)}`;
+  document.getElementById("summaryDelivery").textContent = delivery === 0 ? "Free" : `$${delivery.toFixed(2)}`;
+  document.getElementById("summaryDelivery").classList.toggle("delivery-fee", delivery === 0);
+  document.getElementById("summaryTotal").textContent = `$${total.toFixed(2)}`;
+}
+
+/* =====================================================
+   11. FORM VALIDATION
+   ===================================================== */
+function validateCheckoutForm() {
+  let valid = true;
+
+  const fields = [
+    { id: "firstName", msg: "First name is required" },
+    { id: "lastName", msg: "Last name is required" },
+    { id: "email", msg: "Valid email is required" },
+    { id: "phone", msg: "Phone number is required" },
+    { id: "address", msg: "Address is required" },
+    { id: "city", msg: "City is required" },
+  ];
+
+  fields.forEach(({ id, msg }) => {
+    const input = document.getElementById(id);
+    const error = document.getElementById(id + "Error");
+    input.classList.remove("error");
+    if (error) error.textContent = "";
+
+    if (!input.value.trim()) {
+      input.classList.add("error");
+      if (error) error.textContent = msg;
+      valid = false;
+    }
+  });
+
+  // Extra email format check
+  const emailInput = document.getElementById("email");
+  const emailError = document.getElementById("emailError");
+  if (emailInput.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value.trim())) {
+    emailInput.classList.add("error");
+    emailError.textContent = "Please enter a valid email";
+    valid = false;
+  }
+
+  return valid;
+}
+
+/* =====================================================
+   12. PLACE ORDER
+   ===================================================== */
+function placeOrder() {
+  // Generate a random order ID
+  const orderId = "LS-" + Math.random().toString(36).substring(2, 8).toUpperCase();
+  document.getElementById("orderId").textContent = orderId;
+
+  // Clear cart
+  cart = [];
+  saveCart();
+  updateCartUI();
+
+  // Close checkout modal
+  closeCheckout();
+
+  // Show success modal
+  const overlay = document.getElementById("successOverlay");
+  overlay.style.display = "flex";
+  requestAnimationFrame(() => {
+    overlay.classList.add("visible");
+  });
+}
+
+/* =====================================================
+   13. PAYMENT METHOD TOGGLE
+   ===================================================== */
+function setupPaymentMethods() {
+  const options = document.querySelectorAll(".payment-option");
+  const cardDetails = document.getElementById("cardDetails");
+
+  options.forEach(option => {
+    // Remove old listeners by cloning
+    const newOption = option.cloneNode(true);
+    option.parentNode.replaceChild(newOption, option);
+
+    newOption.addEventListener("click", () => {
+      document.querySelectorAll(".payment-option").forEach(o => o.classList.remove("active"));
+      newOption.classList.add("active");
+      newOption.querySelector("input").checked = true;
+
+      const method = newOption.dataset.method;
+      cardDetails.style.display = method === "card" ? "" : "none";
+    });
+  });
+}
+
+/* =====================================================
+   14. EVENT LISTENERS — delegation & UI events
    ===================================================== */
 
 function setupEvents() {
@@ -308,22 +472,51 @@ function setupEvents() {
   document.getElementById("checkoutBtn").addEventListener("click", () => {
     closeCart();
     // Small delay so the cart drawer closes before modal opens
-    setTimeout(() => {
-      if (typeof openCheckout === "function") openCheckout();
-    }, 300);
+    setTimeout(() => openCheckout(), 300);
+  });
+
+  /* --- Close checkout modal --- */
+  document.getElementById("closeCheckoutBtn").addEventListener("click", closeCheckout);
+
+  /* --- Click overlay to close checkout --- */
+  document.getElementById("checkoutOverlay").addEventListener("click", (e) => {
+    if (e.target === document.getElementById("checkoutOverlay")) {
+      closeCheckout();
+    }
+  });
+
+  /* --- Browse menu button (empty checkout state) --- */
+  document.getElementById("checkoutBrowseBtn").addEventListener("click", () => {
+    closeCheckout();
+    document.getElementById("menu").scrollIntoView({ behavior: "smooth" });
+  });
+
+  /* --- Checkout form submission (single step — validate & place order) --- */
+  document.getElementById("checkoutForm").addEventListener("submit", e => {
+    e.preventDefault();
+    if (validateCheckoutForm()) {
+      placeOrder();
+    }
+  });
+
+  /* --- Success "Back to Home" button --- */
+  document.getElementById("successBackBtn").addEventListener("click", () => {
+    const overlay = document.getElementById("successOverlay");
+    overlay.classList.remove("visible");
+    overlay.style.display = "none";
   });
 
   /* --- Close cart / checkout on Escape key --- */
   document.addEventListener("keydown", e => {
     if (e.key === "Escape") {
       closeCart();
-      if (typeof closeCheckout === "function") closeCheckout();
+      closeCheckout();
     }
   });
 }
 
 /* =====================================================
-   10. INIT — runs on page load
+   15. INIT — runs on page load
    ===================================================== */
 async function init() {
   await loadMenu(); // fetch menu items from json
