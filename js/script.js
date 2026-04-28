@@ -263,11 +263,6 @@ function openCheckout() {
 
   // Reset form
   document.getElementById("checkoutForm").reset();
-  // Reset payment option visuals
-  document.querySelectorAll(".payment-option").forEach(o => o.classList.remove("active"));
-  const cashOption = document.querySelector('.payment-option[data-method="cash"]');
-  if (cashOption) cashOption.classList.add("active");
-  document.getElementById("cardDetails").style.display = "none";
 
   // Check if cart is empty
   if (cart.length === 0) {
@@ -277,7 +272,6 @@ function openCheckout() {
     emptyState.classList.remove("visible");
     grid.style.display = "";
     renderSummary();
-    setupPaymentMethods();
   }
 
   // Show the modal
@@ -386,28 +380,6 @@ function placeOrder() {
   });
 }
 
-/* =====================================================
-   13. PAYMENT METHOD TOGGLE
-   ===================================================== */
-function setupPaymentMethods() {
-  const options = document.querySelectorAll(".payment-option");
-  const cardDetails = document.getElementById("cardDetails");
-
-  options.forEach(option => {
-    // Remove old listeners by cloning
-    const newOption = option.cloneNode(true);
-    option.parentNode.replaceChild(newOption, option);
-
-    newOption.addEventListener("click", () => {
-      document.querySelectorAll(".payment-option").forEach(o => o.classList.remove("active"));
-      newOption.classList.add("active");
-      newOption.querySelector("input").checked = true;
-
-      const method = newOption.dataset.method;
-      cardDetails.style.display = method === "card" ? "" : "none";
-    });
-  });
-}
 
 /* =====================================================
    14. EVENT LISTENERS — delegation & UI events
