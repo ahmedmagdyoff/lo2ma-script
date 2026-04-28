@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout — Lo2ma Script</title>
+  <meta name="description" content="Complete your Lo2ma Script order. Review your items, enter delivery details, and place your order." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/checkout.css" />
+</head>
+
+<body>
+  <!-- ========== NAVBAR ========== -->
+  <header>
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-icon">🍽</span>
+        <span class="logo-text">Lo2ma<span class="logo-accent"> Script</span></span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="index.html#menu" class="nav-link">Menu</a></li>
+        <li><a href="index.html#about" class="nav-link">About</a></li>
+      </ul>
+
+      <a href="index.html" class="back-link">
+        <i class="fa-solid fa-arrow-left"></i> Back to Menu
+      </a>
+    </nav>
+  </header>
+
+  <!-- ========== CHECKOUT MAIN ========== -->
+  <main class="checkout-page">
+    <div class="checkout-header">
+      <p class="section-eyebrow">Checkout</p>
+      <h1 class="section-title">Complete Your <span class="accent">Order</span></h1>
+    </div>
+
+    <!-- Empty cart state -->
+    <div class="checkout-empty" id="checkoutEmpty">
+      <span class="checkout-empty-icon">🛒</span>
+      <h2>Your cart is empty</h2>
+      <p>Looks like you haven't added anything yet.</p>
+      <a href="index.html#menu" class="hero-cta">Browse Menu <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+
+    <div class="checkout-grid" id="checkoutGrid">
+      <!-- LEFT: Form -->
+      <section class="checkout-form-section">
+        <!-- Step Indicators -->
+        <div class="checkout-steps" id="checkoutSteps">
+          <div class="step active" data-step="1">
+            <span class="step-number">1</span>
+            <span class="step-label">Delivery</span>
+          </div>
+          <div class="step-line"></div>
+          <div class="step" data-step="2">
+            <span class="step-number">2</span>
+            <span class="step-label">Payment</span>
+          </div>
+          <div class="step-line"></div>
+          <div class="step" data-step="3">
+            <span class="step-number">3</span>
+            <span class="step-label">Confirm</span>
+          </div>
+        </div>
+
+        <!-- Step 1: Delivery Info -->
+        <form class="checkout-form" id="deliveryForm" novalidate>
+          <h2 class="form-section-title">
+            <i class="fa-solid fa-location-dot"></i> Delivery Information
+          </h2>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="firstName">First Name</label>
+              <input type="text" id="firstName" placeholder="Ahmed" required />
+              <span class="field-error" id="firstNameError"></span>
+            </div>
+            <div class="form-group">
+              <label for="lastName">Last Name</label>
+              <input type="text" id="lastName" placeholder="Magdy" required />
+              <span class="field-error" id="lastNameError"></span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="ahmed@example.com" required />
+            <span class="field-error" id="emailError"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" placeholder="+20 1XX XXX XXXX" required />
+            <span class="field-error" id="phoneError"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="address">Delivery Address</label>
+            <input type="text" id="address" placeholder="Street, Building, Floor…" required />
+            <span class="field-error" id="addressError"></span>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="city">City</label>
+              <input type="text" id="city" placeholder="Cairo" required />
+              <span class="field-error" id="cityError"></span>
+            </div>
+            <div class="form-group">
+              <label for="notes">Notes (Optional)</label>
+              <input type="text" id="notes" placeholder="Ring doorbell, leave at door…" />
+            </div>
+          </div>
+
+          <button type="submit" class="form-next-btn" id="toPaymentBtn">
+            Continue to Payment <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </form>
+
+        <!-- Step 2: Payment Method -->
+        <div class="checkout-form" id="paymentForm" style="display:none;">
+          <h2 class="form-section-title">
+            <i class="fa-solid fa-credit-card"></i> Payment Method
+          </h2>
+
+          <div class="payment-methods" id="paymentMethods">
+            <label class="payment-option active" data-method="cash">
+              <input type="radio" name="payment" value="cash" checked />
+              <div class="payment-option-inner">
+                <i class="fa-solid fa-money-bill-wave"></i>
+                <div>
+                  <span class="payment-label">Cash on Delivery</span>
+                  <span class="payment-desc">Pay when you receive your order</span>
+                </div>
+              </div>
+              <span class="payment-check"><i class="fa-solid fa-circle-check"></i></span>
+            </label>
+
+            <label class="payment-option" data-method="card">
+              <input type="radio" name="payment" value="card" />
+              <div class="payment-option-inner">
+                <i class="fa-solid fa-credit-card"></i>
+                <div>
+                  <span class="payment-label">Credit / Debit Card</span>
+                  <span class="payment-desc">Visa, Mastercard, Mada</span>
+                </div>
+              </div>
+              <span class="payment-check"><i class="fa-solid fa-circle-check"></i></span>
+            </label>
+
+            <label class="payment-option" data-method="wallet">
+              <input type="radio" name="payment" value="wallet" />
+              <div class="payment-option-inner">
+                <i class="fa-solid fa-wallet"></i>
+                <div>
+                  <span class="payment-label">Mobile Wallet</span>
+                  <span class="payment-desc">Vodafone Cash, InstaPay, Fawry</span>
+                </div>
+              </div>
+              <span class="payment-check"><i class="fa-solid fa-circle-check"></i></span>
+            </label>
+          </div>
+
+          <!-- Card details (shown only when card is selected) -->
+          <div class="card-details" id="cardDetails" style="display:none;">
+            <div class="form-group">
+              <label for="cardNumber">Card Number</label>
+              <input type="text" id="cardNumber" placeholder="•••• •••• •••• ••••" maxlength="19" />
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="cardExpiry">Expiry</label>
+                <input type="text" id="cardExpiry" placeholder="MM / YY" maxlength="7" />
+              </div>
+              <div class="form-group">
+                <label for="cardCVC">CVC</label>
+                <input type="text" id="cardCVC" placeholder="•••" maxlength="4" />
+              </div>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="form-back-btn" id="backToDeliveryBtn">
+              <i class="fa-solid fa-arrow-left"></i> Back
+            </button>
+            <button type="button" class="form-next-btn" id="toConfirmBtn">
+              Review Order <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Step 3: Confirmation -->
+        <div class="checkout-form" id="confirmSection" style="display:none;">
+          <h2 class="form-section-title">
+            <i class="fa-solid fa-clipboard-check"></i> Order Review
+          </h2>
+
+          <div class="confirm-details" id="confirmDetails">
+            <!-- Populated by JS -->
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="form-back-btn" id="backToPaymentBtn">
+              <i class="fa-solid fa-arrow-left"></i> Back
+            </button>
+            <button type="button" class="place-order-btn" id="placeOrderBtn">
+              <i class="fa-solid fa-check"></i> Place Order
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- RIGHT: Order Summary Sidebar -->
+      <aside class="order-summary" id="orderSummary">
+        <h2 class="summary-title">
+          <i class="fa-solid fa-receipt"></i> Order Summary
+        </h2>
+        <ul class="summary-items" id="summaryItems">
+          <!-- Populated by JS -->
+        </ul>
+        <div class="summary-divider"></div>
+        <div class="summary-row">
+          <span>Subtotal</span>
+          <span id="summarySubtotal">$0.00</span>
+        </div>
+        <div class="summary-row">
+          <span>Delivery</span>
+          <span id="summaryDelivery" class="delivery-fee">Free</span>
+        </div>
+        <div class="summary-divider"></div>
+        <div class="summary-row summary-total">
+          <span>Total</span>
+          <span id="summaryTotal">$0.00</span>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <!-- ========== ORDER SUCCESS MODAL ========== -->
+  <div class="success-overlay" id="successOverlay">
+    <div class="success-modal" id="successModal">
+      <div class="success-animation">
+        <div class="success-circle">
+          <i class="fa-solid fa-check"></i>
+        </div>
+      </div>
+      <h2 class="success-title">Order Placed!</h2>
+      <p class="success-text">Your delicious food is on its way 🎉</p>
+      <div class="success-order-id">
+        Order #<span id="orderId">—</span>
+      </div>
+      <a href="index.html" class="hero-cta success-btn">
+        Back to Home <i class="fa-solid fa-arrow-right"></i>
+      </a>
+    </div>
+  </div>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="site-footer">
+    <p>© 2025 <strong>Lo2ma Script</strong>. Made with ❤️ for food lovers.</p>
+  </footer>
+
+  <script src="js/checkout.js"></script>
+</body>
+
+</html>

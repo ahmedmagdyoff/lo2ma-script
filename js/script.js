@@ -304,14 +304,10 @@ function setupEvents() {
     }
   });
 
-  /* --- Checkout button (placeholder) --- */
+  /* --- Checkout button — navigate to checkout page --- */
   document.getElementById("checkoutBtn").addEventListener("click", () => {
-    showToast("✅ Order placed! Thank you 🎉");
-    cart = [];
-    saveCart();
-    updateCartUI();
-    renderCartItems();
-    setTimeout(closeCart, 600);
+    closeCart();
+    window.location.href = "checkout.html";
   });
 
   /* --- Close cart on Escape key --- */
