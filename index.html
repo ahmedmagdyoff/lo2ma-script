@@ -1,176 +1,149 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lo2ma Script</title>
 
-    <!-- Google Fonts: Display + Body pairing -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap"
-      rel="stylesheet"
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lo2ma Script</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
 
-    <!-- Font Awesome for icons -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    />
-
-    <link rel="stylesheet" href="css/style.css" />
-  </head>
-  <body>
-    <!-- ========== NAVBAR ========== -->
-    <header>
-      <nav class="navbar" role="navigation" aria-label="Main navigation">
-        <div class="nav-logo">
-          <span class="logo-icon">🍽</span>
-          <span class="logo-text"
-            >Lo2ma<span class="logo-accent"> Script</span></span
-          >
-        </div>
-
-        <ul class="nav-links">
-          <li><a href="#menu" class="nav-link">Menu</a></li>
-          <li><a href="#about" class="nav-link">About</a></li>
-        </ul>
-
-        <!-- Cart icon with badge counter -->
-        <button class="cart-btn" id="cartBtn" aria-label="Open shopping cart">
-          <i class="fa-solid fa-bag-shopping"></i>
-          <span class="cart-badge" id="cartBadge">0</span>
-        </button>
-      </nav>
-    </header>
-
-    <!-- ========== HERO SECTION ========== -->
-    <section class="hero" aria-label="Hero banner">
-      <div class="hero-content">
-        <p class="hero-eyebrow">Fresh · Crafted · Delivered</p>
-        <h1 class="hero-title">Every Bite Tells<br /><em>a Story</em></h1>
-        <p class="hero-subtitle">
-          Authentic flavors, modern soul. Explore our handcrafted menu.
-        </p>
-        <a href="#menu" class="hero-cta"
-          >Explore Menu <i class="fa-solid fa-arrow-down"></i
-        ></a>
-      </div>
-      <div class="hero-illustration" aria-hidden="true">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
-        <span class="hero-emoji">🍔</span>
-      </div>
-    </section>
-
-    <!-- ========== MENU SECTION ========== -->
-    <main id="menu" class="menu-section">
-      <div class="section-header">
-        <p class="section-eyebrow">Our Menu</p>
-        <h2 class="section-title">What Are You Craving?</h2>
+<body>
+  <!-- ========== NAVBAR ========== -->
+  <header>
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+      <div class="nav-logo">
+        <span class="logo-icon">🍽</span>
+        <span class="logo-text">Lo2ma<span class="logo-accent"> Script</span></span>
       </div>
 
-      <!-- Category filter tabs -->
-      <nav class="category-tabs" aria-label="Food categories">
-        <button class="tab-btn active" data-category="all">All</button>
-        <button class="tab-btn" data-category="burgers">🍔 Burgers</button>
-        <button class="tab-btn" data-category="pizza">🍕 Pizza</button>
-        <button class="tab-btn" data-category="drinks">🥤 Drinks</button>
-        <button class="tab-btn" data-category="desserts">🍰 Desserts</button>
-      </nav>
+      <ul class="nav-links">
+        <li><a href="#menu" class="nav-link">Menu</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+      </ul>
 
-      <!-- Food items grid — populated by script.js -->
-      <div
-        class="menu-grid"
-        id="menuGrid"
-        role="list"
-        aria-label="Menu items"
-      ></div>
-    </main>
+      <!-- Cart icon with badge counter -->
+      <button class="cart-btn" id="cartBtn" aria-label="Open shopping cart">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <span class="cart-badge" id="cartBadge">0</span>
+      </button>
+    </nav>
+  </header>
 
-    <!-- ========== ABOUT SECTION ========== -->
-    <section id="about" class="about-section">
-      <div class="about-content">
-        <p class="section-eyebrow">Our Story</p>
-        <h2 class="section-title">
-          Made With <span class="accent">Love</span>
-        </h2>
-        <p class="about-text">
-          Lo2ma Script was born from a passion for bold flavors and honest
-          ingredients. We craft every dish with care — no shortcuts, no
-          compromises.
-        </p>
+  <!-- ========== HERO SECTION ========== -->
+  <section class="hero" aria-label="Hero banner">
+    <div class="hero-content">
+      <p class="hero-eyebrow">Fresh · Crafted · Delivered</p>
+      <h1 class="hero-title">Every Bite Tells<br /><em>a Story</em></h1>
+      <p class="hero-subtitle">
+        Authentic flavors, modern soul. Explore our handcrafted menu.
+      </p>
+      <a href="#menu" class="hero-cta">Explore Menu <i class="fa-solid fa-arrow-down"></i></a>
+    </div>
+    <div class="hero-illustration" aria-hidden="true">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <span class="hero-emoji">🍔</span>
+    </div>
+  </section>
+
+  <!-- ========== MENU SECTION ========== -->
+  <main id="menu" class="menu-section">
+    <div class="section-header">
+      <p class="section-eyebrow">Our Menu</p>
+      <h2 class="section-title">What Are You Craving?</h2>
+    </div>
+
+    <!-- Category filter tabs -->
+    <nav class="category-tabs" aria-label="Food categories">
+      <button class="tab-btn active" data-category="all">All</button>
+      <button class="tab-btn" data-category="burgers">🍔 Burgers</button>
+      <button class="tab-btn" data-category="pizza">🍕 Pizza</button>
+      <button class="tab-btn" data-category="drinks">🥤 Drinks</button>
+      <button class="tab-btn" data-category="desserts">🍰 Desserts</button>
+    </nav>
+
+    <!-- Food items grid — populated by script.js -->
+    <div class="menu-grid" id="menuGrid" role="list" aria-label="Menu items"></div>
+  </main>
+
+  <!-- ========== ABOUT SECTION ========== -->
+  <section id="about" class="about-section">
+    <div class="about-content">
+      <p class="section-eyebrow">Our Story</p>
+      <h2 class="section-title">
+        Made With <span class="accent">Love</span>
+      </h2>
+      <p class="about-text">
+        Lo2ma Script was born from a passion for bold flavors and honest
+        ingredients. We craft every dish with care — no shortcuts, no
+        compromises.
+      </p>
+    </div>
+    <div class="about-stats">
+      <div class="stat">
+        <span class="stat-num">150+</span><span class="stat-label">Menu Items</span>
       </div>
-      <div class="about-stats">
-        <div class="stat">
-          <span class="stat-num">150+</span
-          ><span class="stat-label">Menu Items</span>
-        </div>
-        <div class="stat">
-          <span class="stat-num">12k</span
-          ><span class="stat-label">Happy Customers</span>
-        </div>
-        <div class="stat">
-          <span class="stat-num">4.9★</span
-          ><span class="stat-label">Avg Rating</span>
-        </div>
+      <div class="stat">
+        <span class="stat-num">12k</span><span class="stat-label">Happy Customers</span>
       </div>
-    </section>
-
-    <!-- ========== CART DRAWER ========== -->
-    <!-- Overlay (click to close cart) -->
-    <div class="cart-overlay" id="cartOverlay" aria-hidden="true"></div>
-
-    <aside
-      class="cart-drawer"
-      id="cartDrawer"
-      role="complementary"
-      aria-label="Shopping cart"
-    >
-      <div class="cart-header">
-        <h2 class="cart-title">
-          <i class="fa-solid fa-bag-shopping"></i> Your Order
-        </h2>
-        <button
-          class="close-cart-btn"
-          id="closeCartBtn"
-          aria-label="Close cart"
-        >
-          <i class="fa-solid fa-xmark"></i>
-        </button>
+      <div class="stat">
+        <span class="stat-num">4.9★</span><span class="stat-label">Avg Rating</span>
       </div>
+    </div>
+  </section>
 
-      <!-- Cart items list — populated by script.js -->
-      <ul class="cart-items" id="cartItems" aria-label="Cart items"></ul>
+  <!-- ========== CART DRAWER ========== -->
+  <!-- Overlay (click to close cart) -->
+  <div class="cart-overlay" id="cartOverlay" aria-hidden="true"></div>
 
-      <!-- Empty state -->
-      <div class="cart-empty" id="cartEmpty">
-        <span class="empty-icon">🛍</span>
-        <p>Your cart is empty</p>
-        <small>Add something delicious!</small>
+  <aside class="cart-drawer" id="cartDrawer" role="complementary" aria-label="Shopping cart">
+    <div class="cart-header">
+      <h2 class="cart-title">
+        <i class="fa-solid fa-bag-shopping"></i> Your Order
+      </h2>
+      <button class="close-cart-btn" id="closeCartBtn" aria-label="Close cart">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <!-- Cart items list — populated by script.js -->
+    <ul class="cart-items" id="cartItems" aria-label="Cart items"></ul>
+
+    <!-- Empty state -->
+    <div class="cart-empty" id="cartEmpty">
+      <span class="empty-icon">🛍</span>
+      <p>Your cart is empty</p>
+      <small>Add something delicious!</small>
+    </div>
+
+    <!-- Cart footer with totals -->
+    <div class="cart-footer" id="cartFooter">
+      <div class="cart-totals">
+        <span>Total (<span id="totalItems">0</span> items)</span>
+        <span class="cart-total-price" id="totalPrice">$0.00</span>
       </div>
+      <button class="checkout-btn" id="checkoutBtn">
+        Checkout <i class="fa-solid fa-arrow-right"></i>
+      </button>
+    </div>
+  </aside>
 
-      <!-- Cart footer with totals -->
-      <div class="cart-footer" id="cartFooter">
-        <div class="cart-totals">
-          <span>Total (<span id="totalItems">0</span> items)</span>
-          <span class="cart-total-price" id="totalPrice">$0.00</span>
-        </div>
-        <button class="checkout-btn" id="checkoutBtn">
-          Checkout <i class="fa-solid fa-arrow-right"></i>
-        </button>
-      </div>
-    </aside>
+  <!-- ========== TOAST NOTIFICATION ========== -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-    <!-- ========== TOAST NOTIFICATION ========== -->
-    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <!-- ========== FOOTER ========== -->
+  <footer class="site-footer">
+    <p>© 2025 <strong>Lo2ma Script</strong>. Made with ❤️ for food lovers.</p>
+  </footer>
 
-    <!-- ========== FOOTER ========== -->
-    <footer class="site-footer">
-      <p>© 2025 <strong>Lo2ma Script</strong>. Made with ❤️ for food lovers.</p>
-    </footer>
+  <script src="js/script.js"></script>
+</body>
 
-    <script src="js/script.js"></script>
-  </body>
 </html>
