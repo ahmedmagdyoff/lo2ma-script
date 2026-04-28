@@ -553,69 +553,6 @@ header {
 }
 
 /* =====================================================
-   ABOUT SECTION
-   ===================================================== */
-.about-section {
-  background: var(--clr-dark);
-  color: var(--clr-drawer-text);
-  padding: 5rem 1.5rem;
-}
-
-.about-section .section-eyebrow {
-  color: var(--clr-accent);
-}
-
-.about-section .section-title {
-  color: #fff;
-  max-width: 500px;
-}
-
-.about-section .accent {
-  color: var(--clr-primary);
-}
-
-.about-content {
-  max-width: 1200px;
-  margin: 0 auto 3rem;
-}
-
-.about-text {
-  margin-top: 1rem;
-  max-width: 480px;
-  color: #b09a82;
-  line-height: 1.75;
-  font-size: .95rem;
-}
-
-.about-stats {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  gap: 3rem;
-  flex-wrap: wrap;
-}
-
-.stat {
-  display: flex;
-  flex-direction: column;
-  gap: .25rem;
-}
-
-.stat-num {
-  font-family: var(--ff-display);
-  font-size: 2.5rem;
-  font-weight: 900;
-  color: var(--clr-accent);
-}
-
-.stat-label {
-  font-size: .8rem;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: #7a6654;
-}
-
-/* =====================================================
    CART DRAWER
    ===================================================== */
 /* Overlay */
