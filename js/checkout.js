@@ -1,29 +1,47 @@
 /**
  * Lo2ma Script — checkout.js
- * Handles: multi-step checkout flow, form validation,
- *          order summary rendering, and order placement.
+ * Handles: checkout MODAL popup, multi-step flow,
+ *          form validation, order summary, and order placement.
+ *          Works inline on index.html (not a separate page).
  */
 
 /* =====================================================
    1. STATE
    ===================================================== */
-let cart = [];
 let currentStep = 1;
 
 /* =====================================================
-   2. LOCALSTORAGE
+   2. OPEN / CLOSE CHECKOUT MODAL
    ===================================================== */
-function loadCart() {
-  try {
-    const saved = localStorage.getItem("lo2maCart");
-    if (saved) cart = JSON.parse(saved);
-  } catch (e) {
-    cart = [];
+function openCheckout() {
+  const overlay = document.getElementById("checkoutOverlay");
+  const emptyState = document.getElementById("checkoutEmpty");
+  const grid = document.getElementById("checkoutGrid");
+
+  // Reset to step 1
+  currentStep = 1;
+  goToStep(1);
+
+  // Check if cart is empty (cart variable is from script.js)
+  if (cart.length === 0) {
+    emptyState.classList.add("visible");
+    grid.style.display = "none";
+  } else {
+    emptyState.classList.remove("visible");
+    grid.style.display = "";
+    renderSummary();
+    setupPaymentMethods();
   }
+
+  // Show the modal
+  overlay.classList.add("open");
+  document.body.style.overflow = "hidden";
 }
 
-function saveCart() {
-  localStorage.setItem("lo2maCart", JSON.stringify(cart));
+function closeCheckout() {
+  const overlay = document.getElementById("checkoutOverlay");
+  overlay.classList.remove("open");
+  document.body.style.overflow = "";
 }
 
 /* =====================================================
@@ -90,8 +108,9 @@ function goToStep(step) {
     line.classList.toggle("active", i < step - 1);
   });
 
-  // Scroll to top of form
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  // Scroll modal to top
+  const modal = document.getElementById("checkoutModal");
+  if (modal) modal.scrollTop = 0;
 }
 
 /* =====================================================
@@ -173,8 +192,8 @@ function renderConfirmation() {
     </div>
     <div class="confirm-block">
       <p class="confirm-block-title">Order Total</p>
-      <p><strong style="font-size:1.2rem;color:var(--clr-primary)">$${total.toFixed(2)}</strong>
-         <span style="font-size:.82rem;margin-left:.4rem">(${cart.reduce((s, c) => s + c.quantity, 0)} items + ${delivery === 0 ? "Free" : "$" + delivery.toFixed(2)} delivery)</span></p>
+      <p><strong style="font-size:1.1rem;color:var(--clr-primary)">$${total.toFixed(2)}</strong>
+         <span style="font-size:.78rem;margin-left:.4rem">(${cart.reduce((s, c) => s + c.quantity, 0)} items + ${delivery === 0 ? "Free" : "$" + delivery.toFixed(2)} delivery)</span></p>
     </div>
   `;
 }
@@ -190,6 +209,10 @@ function placeOrder() {
   // Clear cart
   cart = [];
   saveCart();
+  updateCartUI();
+
+  // Close checkout modal
+  closeCheckout();
 
   // Show success modal
   const overlay = document.getElementById("successOverlay");
@@ -208,14 +231,18 @@ function setupPaymentMethods() {
   const cardDetails = document.getElementById("cardDetails");
 
   options.forEach(option => {
-    option.addEventListener("click", () => {
+    // Remove old listeners by cloning
+    const newOption = option.cloneNode(true);
+    option.parentNode.replaceChild(newOption, option);
+
+    newOption.addEventListener("click", () => {
       // Update active states
-      options.forEach(o => o.classList.remove("active"));
-      option.classList.add("active");
-      option.querySelector("input").checked = true;
+      document.querySelectorAll(".payment-option").forEach(o => o.classList.remove("active"));
+      newOption.classList.add("active");
+      newOption.querySelector("input").checked = true;
 
       // Show/hide card details
-      const method = option.dataset.method;
+      const method = newOption.dataset.method;
       cardDetails.style.display = method === "card" ? "" : "none";
     });
   });
@@ -224,23 +251,23 @@ function setupPaymentMethods() {
 /* =====================================================
    9. INIT & EVENTS
    ===================================================== */
-function init() {
-  loadCart();
+function initCheckout() {
+  // Close checkout modal
+  document.getElementById("closeCheckoutBtn").addEventListener("click", closeCheckout);
 
-  const emptyState = document.getElementById("checkoutEmpty");
-  const grid = document.getElementById("checkoutGrid");
+  // Click overlay to close
+  document.getElementById("checkoutOverlay").addEventListener("click", (e) => {
+    if (e.target === document.getElementById("checkoutOverlay")) {
+      closeCheckout();
+    }
+  });
 
-  if (cart.length === 0) {
-    emptyState.classList.add("visible");
-    grid.style.display = "none";
-    return;
-  }
-
-  emptyState.classList.remove("visible");
-  grid.style.display = "";
-
-  renderSummary();
-  setupPaymentMethods();
+  // Browse menu button (in empty state) — close modal
+  document.getElementById("checkoutBrowseBtn").addEventListener("click", () => {
+    closeCheckout();
+    // Scroll to menu
+    document.getElementById("menu").scrollIntoView({ behavior: "smooth" });
+  });
 
   // Step 1 → 2
   document.getElementById("deliveryForm").addEventListener("submit", e => {
@@ -259,6 +286,13 @@ function init() {
 
   // Place order
   document.getElementById("placeOrderBtn").addEventListener("click", placeOrder);
+
+  // Success "Back to Home" button
+  document.getElementById("successBackBtn").addEventListener("click", () => {
+    const overlay = document.getElementById("successOverlay");
+    overlay.classList.remove("visible");
+    overlay.style.display = "none";
+  });
 }
 
-document.addEventListener("DOMContentLoaded", init);
+document.addEventListener("DOMContentLoaded", initCheckout);

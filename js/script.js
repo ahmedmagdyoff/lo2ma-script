@@ -304,15 +304,21 @@ function setupEvents() {
     }
   });
 
-  /* --- Checkout button — navigate to checkout page --- */
+  /* --- Checkout button — open checkout popup --- */
   document.getElementById("checkoutBtn").addEventListener("click", () => {
     closeCart();
-    window.location.href = "checkout.html";
+    // Small delay so the cart drawer closes before modal opens
+    setTimeout(() => {
+      if (typeof openCheckout === "function") openCheckout();
+    }, 300);
   });
 
-  /* --- Close cart on Escape key --- */
+  /* --- Close cart / checkout on Escape key --- */
   document.addEventListener("keydown", e => {
-    if (e.key === "Escape") closeCart();
+    if (e.key === "Escape") {
+      closeCart();
+      if (typeof closeCheckout === "function") closeCheckout();
+    }
   });
 }
 
