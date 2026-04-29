@@ -25,7 +25,7 @@
   --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.14);
 
-  --transition: 0.25s ease;
+  --transition: 0.3s ease;
 }
 
 /* ---------- Reset ---------- */
@@ -143,9 +143,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition:
-    background var(--transition),
-    transform var(--transition);
+  transition: all var(--transition);
   box-shadow: 0 4px 12px rgba(200, 82, 26, 0.35);
 }
 
@@ -169,7 +167,7 @@ header {
   align-items: center;
   justify-content: center;
   padding: 0 4px;
-  transition: transform 0.2s;
+  transition: all var(--transition);
 }
 
 /* =====================================================
@@ -419,9 +417,7 @@ header {
   font-weight: 600;
   padding: 0.5rem 1rem;
   border-radius: var(--radius-xl);
-  transition:
-    background var(--transition),
-    transform var(--transition);
+  transition: all var(--transition);
 }
 
 .add-btn:hover,
@@ -441,7 +437,7 @@ header {
   z-index: 200;
   opacity: 0;
   pointer-events: none;
-  transition: opacity var(--transition);
+  transition: all var(--transition);
 }
 
 .cart-overlay.open {
@@ -462,7 +458,7 @@ header {
   display: flex;
   flex-direction: column;
   transform: translateX(100%);
-  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all var(--transition);
   box-shadow: -8px 0 40px rgba(0, 0, 0, 0.35);
 }
 
@@ -573,7 +569,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background var(--transition);
+  transition: all var(--transition);
   line-height: 1;
 }
 
@@ -594,7 +590,7 @@ header {
   color: #7a5a4a;
   font-size: 0.9rem;
   padding: 0.2rem;
-  transition: color var(--transition);
+  transition: all var(--transition);
 }
 
 .ci-remove:hover {
@@ -721,7 +717,7 @@ header {
   justify-content: center;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.35s ease;
+  transition: all var(--transition);
   padding: 1.5rem;
 }
 
@@ -744,9 +740,7 @@ header {
     0 24px 80px rgba(0, 0, 0, 0.3),
     0 0 0 1px rgba(255, 255, 255, 0.06);
   transform: scale(0.92) translateY(30px);
-  transition:
-    transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-    opacity 0.4s ease;
+  transition: all var(--transition);
   opacity: 0;
   scrollbar-width: thin;
   scrollbar-color: var(--clr-border) transparent;
@@ -854,9 +848,7 @@ header {
   font-size: 0.88rem;
   color: var(--clr-dark);
   background: var(--clr-bg);
-  transition:
-    border-color var(--transition),
-    box-shadow var(--transition);
+  transition: all var(--transition);
   outline: none;
 }
 
@@ -897,9 +889,7 @@ header {
   border: none;
   cursor: pointer;
   font-family: var(--ff-body);
-  transition:
-    background var(--transition),
-    transform var(--transition);
+  transition: all var(--transition);
   box-shadow: 0 4px 16px rgba(42, 157, 42, 0.35);
 }
 
@@ -1020,7 +1010,7 @@ header {
   align-items: center;
   justify-content: center;
   opacity: 0;
-  transition: opacity 0.4s ease;
+  transition: all var(--transition);
 }
 
 .success-overlay.visible {
@@ -1083,31 +1073,6 @@ header {
 .success-btn {
   display: inline-flex;
   margin: 0 auto;
-}
-
-/* =====================================================
-   TOAST NOTIFICATION
-   ===================================================== */
-.toast {
-  position: fixed;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%) translateY(120%);
-  background: var(--clr-dark);
-  color: #fff;
-  font-size: 0.875rem;
-  font-weight: 500;
-  padding: 0.7rem 1.4rem;
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-lg);
-  z-index: 500;
-  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-  white-space: nowrap;
-  pointer-events: none;
-}
-
-.toast.show {
-  transform: translateX(-50%) translateY(0);
 }
 
 /* =====================================================
