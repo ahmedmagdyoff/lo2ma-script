@@ -66,6 +66,7 @@ function removeFromCart(itemId) {
 }
 function changeQty(itemId, delta) {
   const item = cart.find(item => item.id === itemId);
+  if (!item) return;
   item.quantity += delta;
   if (item.quantity <= 0) {
     removeFromCart(itemId);
@@ -226,6 +227,7 @@ function setupEvents() {
   });
   document.getElementById("menuGrid").addEventListener("click", e => {
     const btn = e.target.closest(".add-btn");
+    if (!btn) return;
     const itemId = parseInt(btn.dataset.id);
     addToCart(itemId);
     btn.classList.add("added");
