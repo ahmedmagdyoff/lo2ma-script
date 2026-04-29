@@ -176,14 +176,29 @@ header {
   max-width: 1200px;
   margin: 0 auto;
   margin-top: -100px;
-  padding: 100px 1.5rem;
-  height: 100vh;
-  display: grid;
-  grid-template-columns: 1fr auto;
+  padding: 0 1.5rem;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.hero .content {
+  display: flex;
   gap: 1.5rem;
   align-items: center;
-  position: relative;
-  overflow: hidden;
+  justify-content: space-between;
+}
+
+.hero .space {
+  min-height: 100px;
+}
+
+.hero .hero-content {
+  display: flex;
+  gap: 1.5rem;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .hero-eyebrow {
@@ -191,7 +206,6 @@ header {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--clr-muted);
-  margin-bottom: 1rem;
 }
 
 .hero-title {
@@ -199,7 +213,6 @@ header {
   font-size: clamp(2.8rem, 6vw, 5rem);
   font-weight: 900;
   color: var(--clr-dark);
-  margin-bottom: 1.5rem;
 }
 
 .hero-title em {
@@ -209,7 +222,6 @@ header {
 .hero-subtitle {
   color: var(--clr-muted);
   max-width: 400px;
-  margin-bottom: 1.5rem;
   line-height: 1.5;
 }
 
@@ -227,14 +239,14 @@ header {
   box-shadow: 0 6px 20px rgba(200, 82, 26, 0.35);
 }
 
-.hero-cta:hover {
-  background: var(--clr-primary);
+.hero-illustration {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Hero illustration */
-.hero-emoji {
-  font-size: 25rem;
-  z-index: 1;
+.hero-emoji i {
+  font-size: 20rem;
   color: var(--clr-primary);
 }
 
@@ -413,7 +425,7 @@ header {
   top: 0;
   right: 0;
   width: min(420px, 100vw);
-  height: 100vh;
+  height: 100dvh;
   background: var(--clr-drawer-bg);
   color: var(--clr-drawer-text);
   z-index: 300;
@@ -694,7 +706,6 @@ header {
   border-radius: var(--radius-lg);
   width: 100%;
   max-width: 1050px;
-  max-height: 90vh;
   overflow-y: auto;
   position: relative;
   padding: 1.5rem;
@@ -1057,22 +1068,25 @@ header {
    RESPONSIVE
    ===================================================== */
 @media (max-width: 768px) {
-  .hero {
-    display: flex;
+  .hero .content {
     text-align: center;
     flex-direction: column-reverse;
   }
 
-  .hero-emoji {
-    font-size: 20rem;
+  .hero .hero-content {
+    align-items: center;
   }
-}
 
-/* --------- Checkout modal responsive --------- */
-@media (max-width: 900px) {
+  .hero-illustration {
+    display: none;
+  }
+
+  .hero .space.bottom {
+    min-height: unset;
+  }
+
   .checkout-modal {
-    padding: 1.5rem;
-    max-height: 92vh;
+    max-height: calc(100dvh - 3rem);
   }
 
   .checkout-grid {
@@ -1083,28 +1097,8 @@ header {
     position: static;
     order: -1;
   }
-}
-
-@media (max-width: 600px) {
-  .checkout-overlay {
-    padding: 0.5rem;
-  }
-
-  .checkout-modal {
-    padding: 1.25rem;
-    border-radius: var(--radius-md);
-    max-height: 95vh;
-  }
 
   .checkout-form .form-row {
     grid-template-columns: 1fr;
-  }
-
-  .checkout-form {
-    padding: 1.2rem;
-  }
-
-  .checkout-modal-header .section-title {
-    font-size: 1.4rem;
   }
 }
