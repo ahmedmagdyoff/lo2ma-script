@@ -102,9 +102,6 @@
         </button>
       </div>
 
-      <!-- Cart items list — populated by script.js -->
-      <ul class="cart-items" id="cartItems" aria-label="Cart items"></ul>
-
       <!-- Empty state -->
       <div class="cart-empty" id="cartEmpty">
         <span class="empty-icon">🛍</span>
@@ -112,15 +109,23 @@
         <small>Add something delicious!</small>
       </div>
 
+      <!-- Cart items list — populated by script.js -->
+      <ul class="cart-items" id="cartItems" aria-label="Cart items"></ul>
+
       <!-- Cart footer with totals -->
       <div class="cart-footer" id="cartFooter">
         <div class="cart-totals">
           <span>Total (<span id="totalItems">0</span> items)</span>
           <span class="cart-total-price" id="totalPrice">$0.00</span>
         </div>
-        <button class="checkout-btn" id="checkoutBtn">
-          Checkout <i class="fa-solid fa-arrow-right"></i>
-        </button>
+        <div class="cart-actions">
+          <button class="clear-cart-btn" id="clearCartBtn">
+            <i class="fa-solid fa-trash"></i> Clear
+          </button>
+          <button class="checkout-btn" id="checkoutBtn">
+            Checkout <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
       </div>
     </aside>
 
@@ -266,9 +271,6 @@
         </button>
       </div>
     </div>
-
-    <!-- ========== TOAST NOTIFICATION ========== -->
-    <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
     <!-- ========== FOOTER ========== -->
     <footer class="site-footer">

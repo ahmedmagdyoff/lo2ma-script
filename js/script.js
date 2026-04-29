@@ -64,6 +64,12 @@ function removeFromCart(itemId) {
   updateCartUI();
   renderCartItems();
 }
+function clearCart() {
+  cart = [];
+  saveCart();
+  updateCartUI();
+  renderCartItems();
+}
 function changeQty(itemId, delta) {
   const item = cart.find(item => item.id === itemId);
   if (!item) return;
@@ -240,6 +246,7 @@ function setupEvents() {
   document.getElementById("cartBtn").addEventListener("click", openCart);
   document.getElementById("closeCartBtn").addEventListener("click", closeCart);
   document.getElementById("cartOverlay").addEventListener("click", closeCart);
+  document.getElementById("clearCartBtn").addEventListener("click", clearCart);
   document.getElementById("cartItems").addEventListener("click", e => {
     const qtyBtn = e.target.closest(".qty-btn");
     if (qtyBtn) {
