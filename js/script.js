@@ -7,6 +7,22 @@ async function loadMenu() {
   menu = await response.json();
 }
 /* =====================================================
+   THEME TOGGLE (Dark Mode)
+   ===================================================== */
+function initTheme() {
+  const saved = localStorage.getItem('lo2maTheme') || 'light';
+  applyTheme(saved);
+}
+function applyTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  document.getElementById('themeIcon').className = theme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+}
+function toggleTheme() {
+  const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  applyTheme(next);
+  localStorage.setItem('lo2maTheme', next);
+}
+/* =====================================================
    4. RENDER MENU
    ===================================================== */
 let activeCategory = "all";
@@ -272,15 +288,17 @@ function setupEvents() {
     e.preventDefault();
     if (validateCheckoutForm()) placeOrder();
   });
-  document.getElementById("successBackBtn").addEventListener("click", () => {
-    const overlay = document.getElementById("successOverlay");
-    overlay.classList.remove("visible");
+  document.getElementById('successBackBtn').addEventListener('click', () => {
+    const overlay = document.getElementById('successOverlay');
+    overlay.classList.remove('visible');
   });
+  document.getElementById('themeToggle').addEventListener('click', toggleTheme);
 }
 /* =====================================================
    15. INIT — runs on page load
    ===================================================== */
 async function init() {
+  initTheme();
   await loadMenu();
   loadCart();
   renderMenu();

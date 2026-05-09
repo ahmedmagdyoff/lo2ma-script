@@ -63,12 +63,26 @@
   /* Border */
   --border-color: var(--secondary-10-color);
   /* Blur */
-  --blur-color: rgba(250, 248, 244, 0.92);
+  --blur-color: rgba(250, 248, 244, 0.9);
   /* Overlay */
   --overlay-color: var(--secondary-50-color);
   /* Font Family */
   --primary-font-family: "DM Sans", sans-serif;
   --secondary-font-family: "Playfair Display", serif;
+}
+
+/* ---------- Dark Mode Variables ---------- */
+[data-theme="dark"] {
+  /* Light */
+  --light-color: #000000;
+  /* Dark */
+  --dark-color: #ffffff;
+  /* Muted */
+  --muted-color: #8a7260;
+  /* Background */
+  --background-color: #121212;
+  /* Blur */
+  --blur-color: rgba(18, 18, 18, 0.9);
 }
 
 /* ---------- Reset ---------- */
@@ -176,6 +190,41 @@ header {
 
 .logo-accent {
   color: var(--primary-color);
+}
+
+/* Nav actions (cart + theme toggle) */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--gap-var) / 2);
+}
+
+/* Theme toggle */
+.theme-toggle {
+  display: flex;
+  position: relative;
+  align-items: center;
+  border-radius: 100px;
+  justify-content: center;
+  color: var(--secondary-color);
+  width: var(--icon-size-var);
+  height: var(--icon-size-var);
+  transition: var(--transition);
+  background: var(--secondary-10-color);
+  font-size: var(--icon-font-size-var);
+}
+
+.theme-toggle:hover {
+  color: var(--primary-color);
+  background: var(--primary-10-color);
+}
+
+.theme-toggle i {
+  transition: transform 0.4s ease;
+}
+
+.theme-toggle:hover i {
+  transform: rotate(30deg);
 }
 
 /* Cart button */
