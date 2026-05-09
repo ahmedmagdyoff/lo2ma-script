@@ -141,6 +141,16 @@ img {
   display: block;
 }
 
+body,
+button,
+input,
+.food-card,
+.checkout-modal,
+.cart-drawer,
+.order-summary {
+  transition: var(--transition);
+}
+
 /* ---------- Utility ---------- */
 .accent {
   color: var(--primary-color);
