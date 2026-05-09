@@ -15,7 +15,8 @@ function initTheme() {
 }
 function applyTheme(theme) {
   document.documentElement.setAttribute('data-theme', theme);
-  document.getElementById('themeIcon').className = theme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+  const icon = document.getElementById('themeIcon');
+  if (icon) icon.className = theme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
 }
 function toggleTheme() {
   const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
