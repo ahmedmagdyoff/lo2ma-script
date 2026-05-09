@@ -202,15 +202,15 @@ header {
   color: var(--primary-color);
 }
 
-/* Nav actions (cart + theme toggle) */
+/* Nav actions */
 .nav-actions {
   display: flex;
   align-items: center;
   gap: calc(var(--gap-var) / 2);
 }
 
-/* Theme toggle */
-.theme-toggle {
+/* Icon button */
+.icon-btn {
   display: flex;
   position: relative;
   align-items: center;
@@ -225,28 +225,7 @@ header {
   box-shadow: 0px 0px 25px 0px var(--secondary-25-color);
 }
 
-.theme-toggle:hover {
-  background: var(--primary-color);
-  box-shadow: 0px 0px 25px 0px var(--primary-25-color);
-}
-
-/* Cart button */
-.cart-btn {
-  display: flex;
-  position: relative;
-  align-items: center;
-  border-radius: 100px;
-  justify-content: center;
-  color: var(--light-color);
-  width: var(--icon-size-var);
-  height: var(--icon-size-var);
-  transition: var(--transition);
-  background: var(--secondary-color);
-  font-size: var(--icon-font-size-var);
-  box-shadow: 0px 0px 25px 0px var(--secondary-25-color);
-}
-
-.cart-btn:hover {
+.icon-btn:hover {
   background: var(--primary-color);
   box-shadow: 0px 0px 25px 0px var(--primary-25-color);
 }
