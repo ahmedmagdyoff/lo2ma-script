@@ -77,10 +77,20 @@
   --light-color: #000000;
   /* Dark */
   --dark-color: #ffffff;
-  /* Muted */
-  --muted-color: #8a7260;
   /* Background */
   --background-color: #121212;
+  /* Secondary */
+  --secondary-color: #e3edf7;
+  /* Secondary 75% */
+  --secondary-75-color: #e3edf7bf;
+  /* Secondary 50% */
+  --secondary-50-color: #e3edf780;
+  /* Secondary 25% */
+  --secondary-25-color: #e3edf740;
+  /* Secondary 10% */
+  --secondary-10-color: #e3edf71a;
+  /* Secondary 5% */
+  --secondary-5-color: #e3edf70d;
   /* Blur */
   --blur-color: rgba(18, 18, 18, 0.9);
 }
@@ -206,25 +216,18 @@ header {
   align-items: center;
   border-radius: 100px;
   justify-content: center;
-  color: var(--secondary-color);
+  color: var(--light-color);
   width: var(--icon-size-var);
   height: var(--icon-size-var);
   transition: var(--transition);
-  background: var(--secondary-10-color);
+  background: var(--secondary-color);
   font-size: var(--icon-font-size-var);
+  box-shadow: 0px 0px 25px 0px var(--secondary-25-color);
 }
 
 .theme-toggle:hover {
-  color: var(--primary-color);
-  background: var(--primary-10-color);
-}
-
-.theme-toggle i {
-  transition: transform 0.4s ease;
-}
-
-.theme-toggle:hover i {
-  transform: rotate(30deg);
+  background: var(--primary-color);
+  box-shadow: 0px 0px 25px 0px var(--primary-25-color);
 }
 
 /* Cart button */
@@ -1114,10 +1117,11 @@ header {
 .site-footer {
   line-height: 1.5;
   text-align: center;
-  color: var(--light-color);
   margin-top: var(--gap-var);
   padding: var(--padding-var);
-  background: var(--secondary-color);
+  color: var(--secondary-color);
+  border-top: var(--border-var);
+  background: var(--background-color);
 }
 
 .site-footer strong {
