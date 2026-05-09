@@ -1,4 +1,5 @@
-import { cart, clearCart } from './cart.js';
+import { cart } from './store.js';
+import { clearCart } from './cart.js';
 export function openCheckout() {
     const overlay = document.getElementById("checkoutOverlay");
     document.getElementById("checkoutForm").reset();

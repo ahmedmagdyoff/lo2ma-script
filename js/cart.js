@@ -1,5 +1,4 @@
-import { menu } from './menu.js';
-export const cart = [];
+import { cart, menu } from './store.js';
 export function loadCart() {
     const saved = localStorage.getItem("lo2maCart");
     if (saved) {
@@ -29,6 +28,7 @@ export function clearCart() {
     cart.length = 0;
     saveCart();
     updateCartUI();
+    renderCartItems();
 }
 export function changeQty(itemId, delta) {
     const item = cart.find(item => item.id === itemId);

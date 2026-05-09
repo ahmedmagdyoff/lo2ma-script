@@ -1,7 +1,8 @@
-export let menu = [];
+import { menu } from './store.js';
 export async function loadMenu() {
   const response = await fetch('data/products.json');
-  menu = await response.json();
+  const data = await response.json();
+  menu.push(...data);
 }
 let activeCategory = "all";
 export function setActiveCategory(category) {
