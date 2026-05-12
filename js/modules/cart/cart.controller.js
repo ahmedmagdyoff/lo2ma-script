@@ -21,11 +21,13 @@ function setupCartEvents() {
         updateCartView();
     });
     View.elements.list?.addEventListener("click", (e) => {
-        if (e.target.closest(".qty-btn")) {
+        const qtyBtn = e.target.closest(".qty-btn");
+        if (qtyBtn) {
             Model.changeQuantity(parseInt(qtyBtn.dataset.id), parseInt(qtyBtn.dataset.delta));
             updateCartView();
         }
-        if (e.target.closest(".ci-remove")) {
+        const removeBtn = e.target.closest(".ci-remove");
+        if (removeBtn) {
             Model.removeFromCart(parseInt(removeBtn.dataset.id));
             updateCartView();
         }
