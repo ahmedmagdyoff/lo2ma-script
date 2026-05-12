@@ -1,2 +1,2 @@
-export const menu = [];
-export const cart = [];
+// export const menu = [];
+// export const cart = [];

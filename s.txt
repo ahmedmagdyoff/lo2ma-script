@@ -1,0 +1,26 @@
+/js
+├── main.js
+│
+├── /core
+│   ├── api.js
+│   ├── state.js
+│   └── utils.js
+│
+└── /modules
+    │
+    ├── /menu
+    │   ├── menu.api.js
+    │   ├── menu.ui.js
+    │   └── menu.controller.js
+    │
+    ├── /cart
+    │   ├── cart.ui.js
+    │   └── cart.controller.js
+    │
+    ├── /checkout
+    │   ├── checkout.api.js
+    │   ├── checkout.ui.js
+    │   └── checkout.controller.js
+    │
+    └── /theme
+        └── theme.js
