@@ -42,7 +42,7 @@ export function displayErrors(errors) {
 }
 export function clearErrors() {
     elements.form.querySelectorAll("input").forEach(input => input.classList.remove("error"));
-    elements.form.querySelectorAll(".error-msg").forEach(span => span.textContent = "");
+    elements.form.querySelectorAll(".field-error").forEach(span => span.textContent = "");
 }
 export function showSuccess(orderId) {
     elements.orderIdSpan.textContent = orderId;
