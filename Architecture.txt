@@ -9,17 +9,18 @@
 └── /modules
     │
     ├── /menu
-    │   ├── menu.api.js
-    │   ├── menu.ui.js
+    │   ├── menu.model.js
+    │   ├── menu.view.js
     │   └── menu.controller.js
     │
     ├── /cart
-    │   ├── cart.ui.js
+    │   ├── cart.model.js
+    │   ├── cart.view.js
     │   └── cart.controller.js
     │
     ├── /checkout
-    │   ├── checkout.api.js
-    │   ├── checkout.ui.js
+    │   ├── checkout.model.js
+    │   ├── checkout.view.js
     │   └── checkout.controller.js
     │
     └── /theme
