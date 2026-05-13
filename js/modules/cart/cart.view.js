@@ -10,11 +10,11 @@ export const elements = {
 };
 export function openCart() {
     elements.drawer?.classList.add("open");
-    elements.overlay?.classList.add("active");
+    elements.overlay?.classList.add("open");
 }
 export function closeCart() {
     elements.drawer?.classList.remove("open");
-    elements.overlay?.classList.remove("active");
+    elements.overlay?.classList.remove("open");
 }
 export function renderCart(cartItems, totals) {
     if (elements.badge) elements.badge.textContent = totals.totalItems;
