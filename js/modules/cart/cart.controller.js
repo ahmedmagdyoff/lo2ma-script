@@ -1,6 +1,7 @@
 import { state } from '../../core/state.js';
 import * as Model from './cart.model.js';
 import * as View from './cart.view.js';
+import { handleOpenCheckout } from '../checkout/checkout.controller.js';
 export function initCart() {
     Model.loadCart();
     updateCartView();
@@ -10,7 +11,7 @@ export function handleAddToCart(itemId) {
     Model.addToCart(itemId);
     updateCartView();
 }
-function updateCartView() {
+export function updateCartView() {
     View.renderCart(state.cart, Model.getTotals());
 }
 function setupCartEvents() {
@@ -19,6 +20,10 @@ function setupCartEvents() {
     document.getElementById("clearCartBtn")?.addEventListener("click", () => {
         Model.clearCart();
         updateCartView();
+    });
+    document.getElementById("checkoutBtn")?.addEventListener("click", () => {
+        View.closeCart();
+        handleOpenCheckout();
     });
     View.elements.list?.addEventListener("click", (e) => {
         const qtyBtn = e.target.closest(".qty-btn");
