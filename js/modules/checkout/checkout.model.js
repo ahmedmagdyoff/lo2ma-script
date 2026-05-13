@@ -1,8 +1,8 @@
 export function validateForm(formData) {
     let isValid = true;
     const errors = {};
-    const requiredFields = ["firstName", "lastName", "email", "phone", "address", "city"];
-    requiredFields.forEach(field => {
+    const fields = ["firstName", "lastName", "email", "phone", "address", "city"];
+    fields.forEach(field => {
         const value = formData.get(field);
         if (!value || value.toString().trim() === "") {
             errors[field] = "This field is required";

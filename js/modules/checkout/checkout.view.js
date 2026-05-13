@@ -9,8 +9,8 @@ export const elements = {
     successBackBtn: document.getElementById("successBackBtn")
 };
 export function openCheckout() {
-    elements.form.reset();
     clearErrors();
+    elements.form.reset();
     elements.overlay.classList.add("open");
 }
 export function closeCheckout() {
@@ -35,18 +35,14 @@ export function renderSummary(cartItems, totals) {
 }
 export function displayErrors(errors) {
     clearErrors();
-    for (const [fieldId, msg] of Object.entries(errors)) {
-        const input = document.getElementById(fieldId);
-        const errorSpan = document.getElementById(`${fieldId}Error`);
-        if (input) input.classList.add("error");
-        if (errorSpan) errorSpan.textContent = msg;
+    for (const [field, msg] of Object.entries(errors)) {
+        document.getElementById(field).classList.add("error");
+        document.getElementById(`${field}Error`).textContent = msg;
     }
 }
 export function clearErrors() {
-    const inputs = elements.form.querySelectorAll("input");
-    const errorSpans = elements.form.querySelectorAll(".error-msg");
-    inputs.forEach(input => input.classList.remove("error"));
-    errorSpans.forEach(span => span.textContent = "");
+    elements.form.querySelectorAll("input").forEach(input => input.classList.remove("error"));
+    elements.form.querySelectorAll(".error-msg").forEach(span => span.textContent = "");
 }
 export function showSuccess(orderId) {
     elements.orderIdSpan.textContent = orderId;
