@@ -11,7 +11,7 @@ export async function initMenu() {
         setupEventListeners();
     } catch (error) {
         console.error("Failed to load menu", error);
-        if (elements.menuGrid) elements.menuGrid.innerHTML = "<p>عذراً، حدث خطأ أثناء تحميل القائمة.</p>";
+        if (elements.menuGrid) elements.menuGrid.innerHTML = "<p>Sorry, an error occurred while loading the menu.</p>";
     }
 }
 function filterMenu(category) {
