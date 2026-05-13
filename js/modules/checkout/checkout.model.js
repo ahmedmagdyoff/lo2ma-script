@@ -16,11 +16,6 @@ export function validateForm(formData) {
     }
     return { isValid, errors };
 }
-export async function submitOrder(orderData) {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            const orderId = "LS-" + Math.random().toString(36).substring(2, 9).toUpperCase();
-            resolve(orderId);
-        }, 500);
-    });
+export function submitOrder(orderData) {
+    return "LS-" + Math.random().toString(36).substring(2, 8).toUpperCase();
 }

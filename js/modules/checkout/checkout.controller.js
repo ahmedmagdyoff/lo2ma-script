@@ -21,20 +21,13 @@ function setupCheckoutEvents() {
         e.preventDefault();
         const formData = new FormData(View.elements.form);
         const validation = Model.validateForm(formData);
-        if (!validation.isValid) {
-            View.displayErrors(validation.errors);
-            return;
-        }
-        try {
-            const orderId = await Model.submitOrder(formData);
+        if (validation.isValid) {
+            const orderId = Model.submitOrder(formData);
             View.closeCheckout();
             View.showSuccess(orderId);
             clearCart();
             updateCartView();
-        } catch (error) {
-            console.error("Order failed:", error);
-            alert("حدث خطأ أثناء إرسال الطلب، يرجى المحاولة مرة أخرى.");
-        }
+        } else View.displayErrors(validation.errors);
     });
     View.elements.successBackBtn?.addEventListener("click", View.closeSuccess);
 }
