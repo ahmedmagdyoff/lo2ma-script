@@ -1,5 +1,6 @@
 export const elements = {
     drawer: document.getElementById("cartDrawer"),
+    overlay: document.getElementById("cartOverlay"),
     list: document.getElementById("cartItems"),
     badge: document.getElementById("cartBadge"),
     totalItems: document.getElementById("totalItems"),
@@ -9,9 +10,11 @@ export const elements = {
 };
 export function openCart() {
     elements.drawer?.classList.add("open");
+    elements.overlay?.classList.add("active");
 }
 export function closeCart() {
     elements.drawer?.classList.remove("open");
+    elements.overlay?.classList.remove("active");
 }
 export function renderCart(cartItems, totals) {
     if (elements.badge) elements.badge.textContent = totals.totalItems;
