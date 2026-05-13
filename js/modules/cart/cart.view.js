@@ -6,7 +6,11 @@ export const elements = {
     totalItems: document.getElementById("totalItems"),
     totalPrice: document.getElementById("totalPrice"),
     footer: document.getElementById("cartFooter"),
-    emptyState: document.getElementById("cartEmpty")
+    emptyState: document.getElementById("cartEmpty"),
+    cartBtn: document.getElementById("cartBtn"),
+    closeBtn: document.getElementById("closeCartBtn"),
+    clearBtn: document.getElementById("clearCartBtn"),
+    checkoutBtn: document.getElementById("checkoutBtn")
 };
 export function openCart() {
     elements.drawer?.classList.add("open");

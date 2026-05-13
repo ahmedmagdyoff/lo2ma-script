@@ -15,13 +15,14 @@ export function updateCartView() {
     View.renderCart(state.cart, Model.getTotals());
 }
 function setupCartEvents() {
-    document.getElementById("cartBtn")?.addEventListener("click", View.openCart);
-    document.getElementById("closeCartBtn")?.addEventListener("click", View.closeCart);
-    document.getElementById("clearCartBtn")?.addEventListener("click", () => {
+    View.elements.cartBtn?.addEventListener("click", View.openCart);
+    View.elements.closeBtn?.addEventListener("click", View.closeCart);
+    View.elements.overlay?.addEventListener("click", View.closeCart);
+    View.elements.clearBtn?.addEventListener("click", () => {
         Model.clearCart();
         updateCartView();
     });
-    document.getElementById("checkoutBtn")?.addEventListener("click", () => {
+    View.elements.checkoutBtn?.addEventListener("click", () => {
         View.closeCart();
         handleOpenCheckout();
     });

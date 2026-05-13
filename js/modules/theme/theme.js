@@ -7,6 +7,7 @@ export function initTheme() {
             if (!localStorage.getItem('lo2maTheme')) applyTheme(e.matches ? 'dark' : 'light');
         });
     } else applyTheme(saved);
+    document.getElementById("themeToggle").addEventListener("click", toggleTheme);
 }
 function applyTheme(theme) {
     document.documentElement.setAttribute('data-theme', theme);
