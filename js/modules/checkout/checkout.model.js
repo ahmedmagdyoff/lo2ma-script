@@ -3,13 +3,14 @@ export function validateForm(formData) {
     const errors = {};
     const requiredFields = ["firstName", "lastName", "email", "phone", "address", "city"];
     requiredFields.forEach(field => {
-        if (!formData.get(field).trim()) {
+        const value = formData.get(field);
+        if (!value || value.toString().trim() === "") {
             errors[field] = "This field is required";
             isValid = false;
         }
     });
-    const email = formData.get("email").trim();
-    if (email && !/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)) {
+    const email = formData.get("email");
+    if (email && email.toString().trim() !== "" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.toString().trim())) {
         errors.email = "Please enter a valid email";
         isValid = false;
     }
