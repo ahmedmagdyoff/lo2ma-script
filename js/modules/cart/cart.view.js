@@ -37,7 +37,7 @@ export function renderCart(cartItems, totals) {
             const li = document.createElement("li");
             li.classList.add("cart-item");
             li.innerHTML = `
-            <img src="${item.image}" alt="${item.name}" class="ci-img" />
+            <img src="images/${item.image}" alt="${item.name}" class="ci-img" />
             <div class="ci-info">
                 <p class="ci-name">${item.name}</p>
                 <p class="ci-price">$${(item.price * item.quantity).toFixed(2)}</p>
