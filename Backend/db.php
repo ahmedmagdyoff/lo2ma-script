@@ -18,13 +18,6 @@ function jsonResponse(mixed $data, int $status = 200): void
     exit;
 }
 
-function getJsonBody(): array
-{
-    $raw = file_get_contents('php://input');
-    $data = json_decode($raw, true);
-    return is_array($data) ? $data : [];
-}
-
 function sanitize(mixed $value): string
 {
     return htmlspecialchars(trim((string) $value), ENT_QUOTES, 'UTF-8');
