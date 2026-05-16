@@ -10,7 +10,7 @@ export function renderProducts(products) {
         card.classList.add("food-card");
         card.innerHTML = `
             <div class="card-img-wrap">
-                <img src="images/${item.image}" alt="${item.name}" loading="lazy" />
+                <img src="${item.image}" alt="${item.name}" loading="lazy" />
                 <span class="card-badge">${item.category}</span>
             </div>
             <div class="card-body">

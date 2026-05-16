@@ -1,7 +1,7 @@
 const BASE_URL = 'https://lo2ma-script.ahmedmagdy.cloud';
 export async function fetchAPI(endpoint, options = {}) {
     try {
-        const response = await fetch(`${BASE_URL}/${endpoint}`, {
+        const response = await fetch(`${BASE_URL}/backend/api/${endpoint}`, {
             headers: {
                 'Content-Type': 'application/json', ...options.headers
             }, ...options

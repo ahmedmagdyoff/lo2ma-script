@@ -22,7 +22,7 @@ export function renderSummary(cartItems, totals) {
         const li = document.createElement("li");
         li.classList.add("summary-item");
         li.innerHTML = `
-            <img class="summary-item-img" src="images/${item.image}" alt="${item.name}" />
+            <img class="summary-item-img" src="${item.image}" alt="${item.name}" />
             <div class="summary-item-info">
                 <p class="summary-item-name">${item.name}</p>
                 <p class="summary-item-qty">x${item.quantity}</p>
